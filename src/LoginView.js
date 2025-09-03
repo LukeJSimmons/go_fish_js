@@ -25,6 +25,6 @@ class LoginView {
       <label for="num_of_bots">Number of bots</label>
       <input class="form-control" type="number" name="num_of_bots" id="num_of_bots" value=1 />
     </div>
-    <input class="btn btn--primary" type="submit" />`
+    <input class="btn btn--primary" type="submit" id="submit" />`
   }
 }
