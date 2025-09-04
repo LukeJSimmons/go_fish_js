@@ -9,9 +9,12 @@ class GameView {
 
   game_page() {
     return `
-    ${this.players_section()}
-    ${this.hand_section()}
-    `
+    <div class="game-page">
+      ${this.players_section()}
+      ${this.feed_section()}
+      ${this.hand_section()}
+      ${this.books_section()}
+    </div>`
   }
 
   players_section() {
@@ -23,11 +26,28 @@ class GameView {
     `
   }
 
+  feed_section() {
+    return `
+    <div class="feed">
+
+    </div>`
+  }
+
   hand_section() {
     return `
     <div class="hand">
       <div class="cards">
         ${this.game.players[0].hand.map(card => `<img src="./src/images/cards/${card.rank}${card.suit}.svg" class="playing-card" alt="${card.rank}-${card.suit}" />`).join('')}
+      </div>
+    </div>
+    `
+  }
+
+  books_section() {
+    return `
+    <div class="books">
+      <div class="cards">
+        ${this.game.players[0].books.map(card => `<img src="./src/images/cards/${card.rank}${card.suit}.svg" class="playing-card" alt="${card.rank}-${card.suit}" />`).join('')}
       </div>
     </div>
     `

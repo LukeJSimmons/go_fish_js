@@ -4,4 +4,9 @@
 /* Components */
 @import './components/cards.css';
 @import './components/form.css';
+@import './components/game-page.css';
 @import './components/playing-card.css';
+
+#main {
+  height: 100%;
+}

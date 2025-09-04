@@ -3,6 +3,8 @@
 
   display: flex;
 
+  padding: var(--op-space-medium);
+
   * {
     margin-right: var(--gf-playing-card-overlap);
   }
