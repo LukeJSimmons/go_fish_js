@@ -1,9 +1,14 @@
 describe('GameView', () => {
+  let player
+  let game
+  let view
+
   beforeEach(() => {
     container = document.createElement('div')
-    const player = new Player('Joe')
-    const game = new Game([player], 1)
-    const view = new GameView(game)
+    player = new Player('Joe')
+    game = new Game([player], 1)
+    view = new GameView(game)
+    game.start()
     view.draw(container)
   })
 
@@ -13,5 +18,9 @@ describe('GameView', () => {
 
   it('displays bots', () => {
     expect(container.querySelectorAll('.player').length).toEqual(2)
+  })
+
+  it('displays hand', () => {
+    expect(container.querySelectorAll('.playing-card').length).toEqual(game.players[0].hand.length)
   })
 })

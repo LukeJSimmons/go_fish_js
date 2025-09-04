@@ -12,6 +12,7 @@ class GoFishController {
     const player = new Player(name)
     const game = new Game([player], num_of_bots)
     const view = new GameView(game)
+    game.start()
     view.draw(this.container())
   }
 }
