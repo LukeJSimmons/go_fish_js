@@ -1,7 +1,7 @@
 describe('GameView', () => {
-  let player
-  let game
-  let view
+  let player,
+      game,
+      view
 
   beforeEach(() => {
     container = document.createElement('div')
@@ -13,11 +13,11 @@ describe('GameView', () => {
   })
 
   it('displays bots', () => {
-    expect(container.querySelectorAll('.player').length).toEqual(1)
+    expect(container.querySelectorAll('.accordion--player').length).toEqual(1)
   })
 
   it('displays bots hand size', () => {
-    bot = container.querySelector('.player')
+    bot = container.querySelector('.accordion--player')
     expect(bot.querySelectorAll('.playing-card').length).toEqual(game.bots[0].hand.length)
   })
 

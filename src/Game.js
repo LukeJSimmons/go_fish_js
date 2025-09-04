@@ -33,7 +33,7 @@ class Game {
   deal_cards() {
     const all_players = this.players.concat(this.bots)
     all_players.map((player) => {
-      Array.from(Array(Game.handSize)).forEach(n => player.hand.push(this.deck.draw_card()))
+      Array.from(Array(Game.handSize)).forEach(n => player.add_card_to_hand(this.deck.draw_card()))
     })
   }
 }

@@ -16,4 +16,8 @@ class Player {
   get books() {
     return this._books
   }
+
+  add_card_to_hand(card) {
+    this.hand.push(card)
+  }
 }

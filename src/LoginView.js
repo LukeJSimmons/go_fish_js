@@ -11,10 +11,10 @@ class LoginView {
   form_element() {
     return `
     <div class="container container--center">
-    <form class="form">
-      <div class="form__header">
-        <span class="form__title">Go Fish</span>
-      </div>
+      <form class="form">
+        <div class="form__header">
+          <span class="form__title">Go Fish</span>
+        </div>
         <div class="form-group">
           <label for="name">Name</label>
           <input class="form-control" type="text" name="name" id="name" required />

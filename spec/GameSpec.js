@@ -1,7 +1,7 @@
 describe('Game', () => {
-  let num_of_bots
-  let player
-  let game
+  let num_of_bots,
+      player,
+      game
 
   beforeEach(() => {
     num_of_bots = 1
