@@ -47,7 +47,9 @@ class GameView {
     return `
     <div class="hand">
       <div class="cards">
-        ${this.game.players[0].hand.map(card => `<img src="./src/images/cards/${card.rank}${card.suit}.svg" class="playing-card" alt="${card.rank}-${card.suit}" />`).join('')}
+        ${this.game.players[0].hand.map(card =>
+          `<img src="./src/images/cards/${card.rank}${card.suit}.svg" class="playing-card" alt="${card.rank}-${card.suit}" />`
+        ).join('')}
       </div>
     </div>
     `
@@ -57,7 +59,9 @@ class GameView {
     return `
     <div class="books">
       <div class="cards">
-        ${this.game.players[0].books.map(card => `<img src="./src/images/cards/${card.rank}${card.suit}.svg" class="playing-card" alt="${card.rank}-${card.suit}" />`).join('')}
+        ${this.game.players[0].books.map(card =>
+          `<img src="./src/images/cards/${card.rank}${card.suit}.svg" class="playing-card" alt="${card.rank}-${card.suit}" />`
+        ).join('')}
       </div>
     </div>
     `
