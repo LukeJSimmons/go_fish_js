@@ -5,7 +5,7 @@ class Game {
   constructor(players, num_of_bots) {
     this._players = players
     this._num_of_bots = Number(num_of_bots)
-    this._deck = new Deck
+    this._deck = new Deck()
   }
 
   get players() {
@@ -13,7 +13,7 @@ class Game {
   }
 
   get bots() {
-    return Array.from(Array(this._num_of_bots))
+    return Array.from(Array(this._num_of_bots).keys())
   }
 
   get deck() {
