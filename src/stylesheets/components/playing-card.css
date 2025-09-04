@@ -1,0 +1,5 @@
+.playing-card {
+  --gf-playing-card-height: calc(40 * var(--op-size-unit));
+
+  height: var(--gf-playing-card-height);
+}
