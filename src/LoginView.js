@@ -13,17 +13,17 @@ class LoginView {
     <div class="container container--center">
     <form class="form">
       <div class="form__header">
-        <span class="form__title">Login</span>
+        <span class="form__title">Go Fish</span>
       </div>
         <div class="form-group">
           <label for="name">Name</label>
           <input class="form-control" type="text" name="name" id="name" required />
         </div>
         <div class="form-group">
-          <label for="num_of_bots">Number of bots</label>
-          <input class="form-control" type="number" name="num_of_bots" id="num_of_bots" value=1 />
+          <label for="num_of_bots">Bots</label>
+          <input class="form-control" type="number" min=1 max=5 name="num_of_bots" id="num_of_bots" value=1 />
         </div>
-        <input class="btn btn--primary" type="submit" id="submit" />
+        <input class="btn btn--primary" type="submit" id="submit" value="Play" />
       </form>
     </div>`
   }

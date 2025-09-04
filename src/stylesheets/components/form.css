@@ -1,6 +1,9 @@
 .form {
   --gf-form-min-width: calc(75 * var(--op-size-unit));
 
+  display: grid;
+  gap: var(--op-space-x-small);
+
   min-width: var(--gf-form-min-width);
   padding: var(--op-space-medium);
 
@@ -13,6 +16,34 @@
 
     .form__title {
       font-size: var(--op-font-large);
+    }
+  }
+}
+
+.form-row {
+  display: flex;
+
+  .form-control {
+    border-radius: 0;
+  }
+
+  :first-child {
+    border-bottom-left-radius: var(--op-radius-small);
+    border-top-left-radius: var(--op-radius-small);
+  }
+
+  :last-child {
+    border-bottom-right-radius: var(--op-radius-small);
+    border-top-right-radius: var(--op-radius-small);
+  }
+
+  &.form-row--three-one-split {
+    :first-child {
+      flex: 3;
+    }
+
+    :last-child {
+      flex: 1;
     }
   }
 }
