@@ -24,6 +24,7 @@ class GameView {
         return `
         <details class="player accordion">
           <summary>
+            <i class="ph ph-caret-right icon accordion__marker"></i>
             <span class="player__name">Bot ${this.game.bots.indexOf(bot)+1}</span>
           </summary>
           <div class="cards cards--player">

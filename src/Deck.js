@@ -18,4 +18,16 @@ class Deck {
   draw_card() {
    return this.cards.pop()
   }
+
+  shuffle() {
+    let currentIndex = this.cards.length
+
+    while(currentIndex != 0) {
+      let randomIndex = Math.floor(Math.random() * currentIndex)
+      currentIndex--
+
+      [this.cards[currentIndex], this.cards[randomIndex]] =
+      [this.cards[randomIndex], this.cards[currentIndex]]
+    }
+  }
 }

@@ -26,6 +26,7 @@ class Game {
   }
 
   start() {
+    this.deck.shuffle()
     this.deal_cards()
   }
 
