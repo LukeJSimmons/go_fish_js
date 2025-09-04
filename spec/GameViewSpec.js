@@ -12,15 +12,17 @@ describe('GameView', () => {
     view.draw(container)
   })
 
-  it('displays player name', () => {
-    expect(container.querySelector('.player').innerText).toEqual('Joe')
+  it('displays bots', () => {
+    expect(container.querySelectorAll('.player').length).toEqual(1)
   })
 
-  it('displays bots', () => {
-    expect(container.querySelectorAll('.player').length).toEqual(2)
+  it('displays bots hand size', () => {
+    bot = container.querySelector('.player')
+    expect(bot.querySelectorAll('.playing-card').length).toEqual(game.bots[0].hand.length)
   })
 
   it('displays hand', () => {
-    expect(container.querySelectorAll('.playing-card').length).toEqual(game.players[0].hand.length)
+    hand = container.querySelector('.hand')
+    expect(hand.querySelectorAll('.playing-card').length).toEqual(game.players[0].hand.length)
   })
 })

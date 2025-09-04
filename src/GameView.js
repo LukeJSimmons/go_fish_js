@@ -20,8 +20,17 @@ class GameView {
   players_section() {
     return `
     <div class="players">
-      ${this.game.players.map(player => `<div class="player">${player.name}</div>`).join('')}
-      ${this.game.bots.map(bot => `<div class="player">Bot ${bot+1}</div>`).join('')}
+      ${this.game.bots.map(bot => {
+        return `
+        <details class="player accordion">
+          <summary>
+            <span class="player__name">Bot ${this.game.bots.indexOf(bot)+1}</span>
+          </summary>
+          <div class="cards cards--player">
+            ${bot.hand.map(card => `<img src="./src/images/cards/2B.svg" class="playing-card" />`).join('')}
+          </div>
+        </details>`
+      }).join('')}
     </div>
     `
   }
