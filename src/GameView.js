@@ -22,10 +22,10 @@ class GameView {
     <div class="players">
       ${this.game.bots.map(bot => {
         return `
-        <details class="player accordion">
+        <details class="accordion accordion--player">
           <summary>
             <i class="ph ph-caret-right icon accordion__marker"></i>
-            <span class="player__name">Bot ${this.game.bots.indexOf(bot)+1}</span>
+            <span class="accordion__label">Bot ${this.game.bots.indexOf(bot)+1}</span>
           </summary>
           <div class="cards cards--player">
             ${bot.hand.map(card => `<img src="./src/images/cards/2B.svg" class="playing-card" />`).join('')}

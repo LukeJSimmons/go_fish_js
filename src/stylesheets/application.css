@@ -1,4 +1,5 @@
 /* Optics Overrides */
+@import './components/optics-overrides/accordion.css';
 @import './components/optics-overrides/container.css';
 
 /* Components */
@@ -6,6 +7,7 @@
 @import './components/form.css';
 @import './components/game-page.css';
 @import './components/playing-card.css';
+@import './components/players.css';
 
 #main {
   height: 100%;

@@ -1,0 +1,18 @@
+.accordion {
+  &.accordion--player {
+    box-shadow: var(--op-border-all) var(--op-color-border);
+
+    border-radius: var(--op-radius-medium);
+
+    summary {
+      padding-block: var(--op-space-small);
+      padding-inline: var(--op-space-x-small);
+      box-shadow: var(--op-border-all) var(--op-color-border);
+    }
+
+    .accordion__label {
+      font-size: var(--op-font-medium);
+      font-weight: var(--op-font-weight-normal);
+    }
+  }
+}
