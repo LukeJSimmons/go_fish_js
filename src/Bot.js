@@ -1,14 +1,15 @@
 class Bot {
-  constructor(hand=[]) {
+  constructor(name, hand=[]) {
+    this._name = name
     this._hand = hand
+  }
+
+  get name() {
+    return this._name
   }
 
   get hand() {
     return this._hand
-  }
-
-  name_with_index(bots_array) {
-    return `Bot ${bots_array.indexOf(this)+1}`
   }
 
   add_card_to_hand(card) {

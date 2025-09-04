@@ -22,7 +22,7 @@ class Game {
   }
 
   build_bots() {
-    return Array.from(Array(this._num_of_bots)).map(bot => new Bot)
+    return Array.from(Array(this._num_of_bots).keys()).map(bot => new Bot(`Bot ${bot+1}`))
   }
 
   start() {

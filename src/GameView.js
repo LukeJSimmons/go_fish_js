@@ -25,7 +25,7 @@ class GameView {
         <details class="accordion accordion--player">
           <summary>
             <i class="ph ph-caret-right icon accordion__marker"></i>
-            <span class="accordion__label">${bot.name_with_index(this.game.bots)}</span>
+            <span class="accordion__label">${bot.name}</span>
           </summary>
           <div class="cards cards--player">
             ${bot.hand.map(card => `<img src="./src/images/cards/2B.svg" class="playing-card" />`).join('')}
