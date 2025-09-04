@@ -1,0 +1,18 @@
+.form {
+  --gf-form-min-width: calc(75 * var(--op-size-unit));
+
+  min-width: var(--gf-form-min-width);
+  padding: var(--op-space-medium);
+
+  border-radius: var(--op-radius-small);
+  box-shadow: var(--op-border-all) var(--op-color-border);
+
+  .form__header {
+    padding-bottom: var(--op-space-x-small);
+    box-shadow: var(--op-border-bottom) var(--op-color-border);
+
+    .form__title {
+      font-size: var(--op-font-large);
+    }
+  }
+}

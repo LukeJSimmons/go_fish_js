@@ -10,17 +10,22 @@ class LoginView {
 
   form_element() {
     return `
-    <form>
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input class="form-control" type="text" name="name" id="name" required />
+    <div class="container container--center">
+    <form class="form">
+      <div class="form__header">
+        <span class="form__title">Login</span>
       </div>
-      <div class="form-group">
-        <label for="num_of_bots">Number of bots</label>
-        <input class="form-control" type="number" name="num_of_bots" id="num_of_bots" value=1 />
-      </div>
-      <input class="btn btn--primary" type="submit" id="submit" />
-    </form>`
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input class="form-control" type="text" name="name" id="name" required />
+        </div>
+        <div class="form-group">
+          <label for="num_of_bots">Number of bots</label>
+          <input class="form-control" type="number" name="num_of_bots" id="num_of_bots" value=1 />
+        </div>
+        <input class="btn btn--primary" type="submit" id="submit" />
+      </form>
+    </div>`
   }
 
   submitForm(event) {

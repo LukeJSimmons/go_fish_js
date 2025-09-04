@@ -4,10 +4,15 @@ class GameView {
   }
 
   draw(container) {
-    container.innerHTML = ''
-    const players = document.createElement('ul')
-    this.game.players.forEach((player) => players.innerHTML += `<li>${player.name}</li>`)
-    this.game.bots.forEach((bot) => players.innerHTML += `<li>Bot ${bot+1}</li>`)
-    container.append(players)
+    container.innerHTML = this.players()
+  }
+
+  players() {
+    return `
+    <div class="players">
+      ${this.game.players.map(player => `<div class="player">${player.name}</div>`)}
+      ${this.game.bots.map(bot => `<div class="player">Bot ${bot+1}</div>`)}
+    </div>
+    `
   }
 }
