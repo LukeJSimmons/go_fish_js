@@ -52,6 +52,7 @@ class GameView {
     return `
     <div class="feed">
       <div class="feed__output">
+        ${this.feed_output()}
       </div>
       <form class="form">
         <div class="form-row">
@@ -75,7 +76,18 @@ class GameView {
 
   feed_output() {
     return this.game.round_results.map(result => {
-      return `<div class="feed-bubble">${result}</div>`
+      return `
+      <div class="feed-bubble-group">
+        <div class="feed-bubble feed-bubble--question">${result.question()}</div>
+        <div class="feed-bubble-row">
+          <i class="ph ph-arrow-elbow-down-right icon"></i>
+          <div class="feed-bubble feed-bubble--response">${result.response()}</div>
+        </div>
+        <div class="feed-bubble-row">
+          <i class="ph ph-arrow-elbow-down-right icon"></i>
+          <div class="feed-bubble feed-bubble--action">${result.action()}</div>
+        </div>
+      </div>`
     }).join('')
   }
 

@@ -44,7 +44,7 @@ class Game {
 
   play_round(request, target) {
     this.handle_matching_cards(request, target)
-    this.round_results.push(`You asked ${target} for ${request}s`)
+    this.round_results.push(new RoundResult(request, target))
   }
 
   handle_matching_cards(request, target) {

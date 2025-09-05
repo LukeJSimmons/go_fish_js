@@ -45,6 +45,7 @@ describe('GameView', () => {
 
       it('plays a round on form submit', () => {
         expect(container.querySelectorAll('.feed-bubble-group').length).toEqual(1)
+        expect(container.querySelectorAll('.feed-bubble--question')[0].innerText).toContain('asked Bot 1')
       })
 
       it('updates hands on form submit', () => {

@@ -10,10 +10,41 @@
   }
 }
 
-.feed-bubble {
-  background-color: var(--op-color-primary-plus-five);
-  color: var(--op-color-primary-on-plus-five-alt);
+.feed-bubble-group {
+  display: grid;
+  gap: var(--op-space-x-small);
+}
 
+.feed-bubble-row {
+  display: flex;
+  align-items: center;
+  gap: var(--op-space-x-small);
+
+  color: var(--op-color-primary-on-plus-eight-alt);
+
+  :last-child {
+    flex: 1;
+  }
+}
+
+.feed-bubble {
   padding: var(--op-space-small);
   border-radius: var(--op-radius-large);
+
+  &.feed-bubble--question {
+    background-color: var(--op-color-primary-plus-five);
+    color: var(--op-color-primary-on-plus-five-alt);
+  }
+
+  &.feed-bubble--response {
+    background-color: var(--op-color-alerts-warning-plus-seven);
+    color: var(--op-color-alerts-warning-on-plus-seven-alt);
+    box-shadow: var(--op-border-all) var(--op-color-alerts-warning-plus-five);
+  }
+
+  &.feed-bubble--action {
+    background-color: var(--op-color-primary-plus-max);
+    color: var(--op-color-primary-on-plus-max);
+    box-shadow: var(--op-border-all) var(--op-color-primary-plus-seven);
+  }
 }
