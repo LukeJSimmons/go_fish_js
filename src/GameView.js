@@ -101,7 +101,7 @@ class GameView {
     <div class="books">
       <div class="cards">
         ${this.game.player.books.map(card =>
-          `<img src="./src/images/cards/${card.rank}${card.suit}.svg" class="playing-card" alt="${card.rank}-${card.suit}" />`
+          `<img src="./src/images/cards/2B.svg" class="playing-card" alt="${card.rank}-${card.suit}" />`
         ).join('')}
       </div>
     </div>
