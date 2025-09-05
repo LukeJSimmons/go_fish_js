@@ -1,8 +1,7 @@
 class Player {
-  constructor(name, hand=[], books=[]) {
+  constructor(name, hand=[]) {
     this._name = name
     this._hand = hand
-    this._books = books
   }
 
   get name() {
@@ -13,11 +12,12 @@ class Player {
     return this._hand
   }
 
-  get books() {
-    return this._books
+  add_cards_to_hand(cards) {
+    this.hand.push(cards)
+    this._hand = this.hand.flat()
   }
 
-  add_card_to_hand(card) {
-    this.hand.push(card)
+  remove_cards_from_hand(cards) {
+    this._hand = this.hand.filter(card => !cards.includes(card))
   }
 }

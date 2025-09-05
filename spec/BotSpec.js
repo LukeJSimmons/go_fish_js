@@ -9,10 +9,10 @@ describe('Bot', () => {
     expect(bot.hand).toEqual([])
   })
 
-  describe('add_card_to_hand', () => {
+  describe('add_cards_to_hand', () => {
     it('adds card to hand', () => {
       card = new Card('A', 'H')
-      bot.add_card_to_hand(card)
+      bot.add_cards_to_hand(card)
       expect(bot.hand[0]).toEqual(card)
     })
   })

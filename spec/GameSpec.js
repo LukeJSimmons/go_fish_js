@@ -1,16 +1,18 @@
 describe('Game', () => {
   let num_of_bots,
+      hand,
       player,
       game
 
   beforeEach(() => {
+    hand = []
     num_of_bots = 1
-    player = new Player(name)
+    player = new Human(name, hand)
     game = new Game([player], num_of_bots)
   })
 
-  it('has players', () => {
-    expect(game.players).toEqual([player])
+  it('has a player', () => {
+    expect(game.player).toEqual(player)
   })
 
   it('has bots', () => {
@@ -21,10 +23,48 @@ describe('Game', () => {
   describe('start', () => {
     it('deals out cards from the deck', () => {
       game.start()
-      expect(game.players[0].hand.length).toEqual(7)
+      expect(game.player.hand.length).toEqual(7)
       expect(game.bots[0].hand.length).toEqual(7)
       expect(game.deck.length()).toEqual(Game.deckSize-14)
-      expect(game.players[0].hand.every((card) => card.rank)).toEqual(true)
+      expect(game.player.hand.every((card) => card.rank)).toEqual(true)
+    })
+  })
+
+  describe('play_round', () => {
+    let request,
+        target
+
+    beforeEach(() => {
+      request = 'A'
+      target = 'Bot 1'
+      game.start()
+    })
+
+    it('adds result to round_results', () => {
+      expect(game.round_results.length).toEqual(0)
+      game.play_round(request, target)
+      expect(game.round_results.length).toEqual(1)
+    })
+
+    describe('when there are matching cards', () => {
+      beforeEach(() => {
+        hand = [new Card('A','H')]
+        player = new Human(name, hand)
+        game = new Game([player], num_of_bots)
+        game.bots[0] = new Bot('Bot 1', [new Card('A','D')])
+      })
+
+      it('adds matching card to player hand', () => {
+        expect(game.player.hand.length).toEqual(1)
+        game.play_round(request, target)
+        expect(game.player.hand.length).toEqual(2)
+      })
+
+      it('removes matching card from target hand', () => {
+        expect(game.bots[0].hand.length).toEqual(1)
+        game.play_round(request, target)
+        expect(game.bots[0].hand.length).toEqual(0)
+      })
     })
   })
 })

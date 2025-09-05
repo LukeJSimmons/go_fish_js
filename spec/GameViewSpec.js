@@ -6,7 +6,7 @@ describe('GameView', () => {
   beforeEach(() => {
     container = document.createElement('div')
     document.body.append(container)
-    player = new Player('Joe')
+    player = new Human('Joe')
     game = new Game([player], 1)
     view = new GameView(game)
     game.start()
@@ -28,7 +28,7 @@ describe('GameView', () => {
 
   it('displays hand', () => {
     hand = container.querySelector('.hand')
-    expect(hand.querySelectorAll('.playing-card').length).toEqual(game.players[0].hand.length)
+    expect(hand.querySelectorAll('.playing-card').length).toEqual(game.player.hand.length)
   })
 
   describe('request form', () => {

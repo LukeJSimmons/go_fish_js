@@ -10,8 +10,8 @@ class Game {
     this._round_results = []
   }
 
-  get players() {
-    return this._players
+  get player() {
+    return this._players[0]
   }
 
   get bots() {
@@ -36,13 +36,21 @@ class Game {
   }
 
   deal_cards() {
-    const all_players = this.players.concat(this.bots)
+    const all_players = this.bots.concat([this.player])
     all_players.map((player) => {
-      Array.from(Array(Game.handSize)).forEach(n => player.add_card_to_hand(this.deck.draw_card()))
+      Array.from(Array(Game.handSize)).forEach(n => player.add_cards_to_hand(this.deck.draw_card()))
     })
   }
 
   play_round(request, target) {
+    this.handle_matching_cards(request, target)
     this.round_results.push(`You asked ${target} for ${request}s`)
+  }
+
+  handle_matching_cards(request, target) {
+    const target_bot = this.bots.find(bot => bot.name == target)
+    const matching_cards = target_bot.hand.filter(card => card.rank == request)
+    this.player.add_cards_to_hand(matching_cards)
+    target_bot.remove_cards_from_hand(matching_cards)
   }
 }

@@ -12,7 +12,7 @@ class GameView {
     event.preventDefault()
     const data = new FormData(document.querySelector('form'))
     this.game.play_round(data.get('request'), data.get('target'))
-    document.querySelector('.feed__output').innerHTML = this.feed_output()
+    this.update_view()
   }
 
   game_page() {
@@ -28,20 +28,24 @@ class GameView {
   players_section() {
     return `
     <div class="players">
-      ${this.game.bots.map(bot => {
-        return `
-        <details class="accordion accordion--player">
-          <summary>
-            <i class="ph ph-caret-right icon accordion__marker"></i>
-            <span class="accordion__label">${bot.name}</span>
-          </summary>
-          <div class="cards cards--player">
-            ${bot.hand.map(card => `<img src="./src/images/cards/2B.svg" class="playing-card" />`).join('')}
-          </div>
-        </details>`
-      }).join('')}
+      ${this.bot_accordions()}
     </div>
     `
+  }
+
+  bot_accordions() {
+    return this.game.bots.map(bot =>
+      `
+      <details class="accordion accordion--player">
+        <summary>
+          <i class="ph ph-caret-right icon accordion__marker"></i>
+          <span class="accordion__label">${bot.name}</span>
+        </summary>
+        <div class="cards cards--player">
+          ${bot.hand.map(card => `<img src="./src/images/cards/${card.rank}${card.suit}.svg" class="playing-card" />`).join('')}
+        </div>
+      </details>`
+    ).join('')
   }
 
   feed_section() {
@@ -60,7 +64,7 @@ class GameView {
           <div class="form-group">
             <label for="request">Request</label>
             <select class="form-control" id="request" name="request">
-              ${this.game.players[0].hand.map(card => ` <option value=${card.rank}>${card.rank}</option>`)}
+              ${this.game.player.hand.map(card => ` <option value=${card.rank}>${card.rank}</option>`)}
             </select>
           </div>
         </div>
@@ -78,8 +82,25 @@ class GameView {
   hand_section() {
     return `
     <div class="hand">
+      ${this.player_hand()}
+    </div>
+    `
+  }
+
+  player_hand() {
+    return `
+    <div class="cards">
+      ${this.game.player.hand.map(card =>
+        `<img src="./src/images/cards/${card.rank}${card.suit}.svg" class="playing-card" alt="${card.rank}-${card.suit}" />`
+      ).join('')}
+    </div>`
+  }
+
+  books_section() {
+    return `
+    <div class="books">
       <div class="cards">
-        ${this.game.players[0].hand.map(card =>
+        ${this.game.player.books.map(card =>
           `<img src="./src/images/cards/${card.rank}${card.suit}.svg" class="playing-card" alt="${card.rank}-${card.suit}" />`
         ).join('')}
       </div>
@@ -87,15 +108,9 @@ class GameView {
     `
   }
 
-  books_section() {
-    return `
-    <div class="books">
-      <div class="cards">
-        ${this.game.players[0].books.map(card =>
-          `<img src="./src/images/cards/${card.rank}${card.suit}.svg" class="playing-card" alt="${card.rank}-${card.suit}" />`
-        ).join('')}
-      </div>
-    </div>
-    `
+  update_view() {
+    document.querySelector('.feed__output').innerHTML = this.feed_output()
+    document.querySelector('.hand').innerHTML = this.player_hand()
+    document.querySelector('.players').innerHTML = this.bot_accordions()
   }
 }
