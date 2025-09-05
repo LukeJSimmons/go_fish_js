@@ -43,8 +43,8 @@ class Game {
   }
 
   play_round(request, target) {
-    this.handle_matching_cards(request, target)
-    this.round_results.push(new RoundResult(request, target))
+    const matching_cards = this.handle_matching_cards(request, target)
+    this.round_results.push(new RoundResult(request, target, matching_cards))
   }
 
   handle_matching_cards(request, target) {
@@ -52,5 +52,6 @@ class Game {
     const matching_cards = target_bot.hand.filter(card => card.rank == request)
     this.player.add_cards_to_hand(matching_cards)
     target_bot.remove_cards_from_hand(matching_cards)
+    return matching_cards
   }
 }
