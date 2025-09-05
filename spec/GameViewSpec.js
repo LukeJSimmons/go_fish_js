@@ -37,19 +37,21 @@ describe('GameView', () => {
         player = new Human(name, [new Card('A','H')])
         game = new Game([player], 1)
         game.bots[0] = new Bot('Bot 1', [new Card('A','D')])
+        view = new GameView(game)
+        view.draw(container)
         const form = container.querySelector('form')
         form.querySelector('#submit').click()
       })
 
       it('plays a round on form submit', () => {
-        expect(container.querySelectorAll('.feed-bubble').length).toEqual(1)
+        expect(container.querySelectorAll('.feed-bubble-group').length).toEqual(1)
       })
 
       it('updates hands on form submit', () => {
         player_hand = container.querySelector('.hand')
         bot_hand = container.querySelector('.cards--player')
-        expect(player_hand.querySelectorAll('.playing-card').length).toEqual(8)
-        expect(bot_hand.querySelectorAll('.playing-card').length).toEqual(6)
+        expect(player_hand.querySelectorAll('.playing-card').length).toEqual(2)
+        expect(bot_hand.querySelectorAll('.playing-card').length).toEqual(0)
       })
     })
   })
