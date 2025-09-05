@@ -92,11 +92,12 @@ class GameView {
           <i class="ph ph-arrow-elbow-down-right icon"></i>
           <div class="feed-bubble feed-bubble--response">${result.response()}</div>
         </div>
-        <div class="feed-bubble-row">
-          <i class="ph ph-arrow-elbow-down-right icon"></i>
-          <div class="feed-bubble feed-bubble--action">${result.action()}</div>
-        </div>
-      </div>`
+        ${result.action() != null ? `
+          <div class="feed-bubble-row">
+              <i class="ph ph-arrow-elbow-down-right icon"></i>
+              <div class="feed-bubble feed-bubble--action">${result.action()}</div>
+            </div>
+          </div>` : ``}`
     }).join('')
   }
 

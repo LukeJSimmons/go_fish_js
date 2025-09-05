@@ -54,6 +54,10 @@ describe('GameView', () => {
         expect(player_hand.querySelectorAll('.playing-card').length).toEqual(2)
         expect(bot_hand.querySelectorAll('.playing-card').length).toEqual(0)
       })
+
+      it('does not show the action bubble', () => {
+        expect(container.querySelectorAll('.feed-bubble--action').length).toEqual(0)
+      })
     })
   })
 })
