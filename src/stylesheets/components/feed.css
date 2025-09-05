@@ -7,6 +7,10 @@
   overflow: hidden;
 
   .feed__output {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: var(--op-space-small);
+
     overflow-y: auto;
     padding: var(--op-space-medium);
   }

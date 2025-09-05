@@ -59,9 +59,9 @@ describe('RoundResult', () => {
         result = new RoundResult(request, target, matching_cards, drawn_card)
       })
 
-      it('returns empty string', () => {
+      it('returns null', () => {
         action = result.action()
-        expect(action).toEqual('')
+        expect(action).toEqual(null)
       })
     })
 

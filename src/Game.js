@@ -44,7 +44,7 @@ class Game {
 
   play_round(request, target) {
     const matching_cards = this.handle_matching_cards(request, target)
-    this.round_results.push(new RoundResult(request, target, matching_cards))
+    this.round_results.unshift(new RoundResult(request, target, matching_cards))
   }
 
   handle_matching_cards(request, target) {

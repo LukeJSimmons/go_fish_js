@@ -17,6 +17,6 @@ class RoundResult {
 
   action() {
     if (this._drawn_card) return `You drew a ${this._drawn_card.rank}`
-    return ''
+    return null
   }
 }
