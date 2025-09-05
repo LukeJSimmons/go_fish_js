@@ -27,10 +27,14 @@ class GameView {
 
   players_section() {
     return `
-    <div class="players">
-      ${this.bot_accordions()}
-    </div>
-    `
+    <div class="panel">
+      <div class="panel__header">
+        <span class="panel__title">Go Fish</span>
+      </div>
+      <div class="players">
+        ${this.bot_accordions()}
+      </div>
+    </div>`
   }
 
   bot_accordions() {
@@ -50,27 +54,32 @@ class GameView {
 
   feed_section() {
     return `
-    <div class="feed">
-      <div class="feed__output">
-        ${this.feed_output()}
+    <div class="panel panel--highlight">
+      <div class="panel__header">
+        <span class="panel__title">Feed</span>
       </div>
-      <form class="form">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="target">Target</label>
-            <select class="form-control" id="target" name="target">
-              ${this.game.bots.map(bot => ` <option value="${bot.name}">${bot.name}</option>`)}
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="request">Request</label>
-            <select class="form-control" id="request" name="request">
-              ${this.game.player.hand.map(card => ` <option value=${card.rank}>${card.rank}</option>`)}
-            </select>
-          </div>
+      <div class="feed">
+        <div class="feed__output">
+          ${this.feed_output()}
         </div>
-        <input class="btn btn--primary" type="submit" id="submit" value="Request" />
-      </form>
+        <form class="form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="target">Target</label>
+              <select class="form-control" id="target" name="target">
+                ${this.game.bots.map(bot => ` <option value="${bot.name}">${bot.name}</option>`)}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="request">Request</label>
+              <select class="form-control" id="request" name="request">
+                ${this.game.player.hand.map(card => ` <option value=${card.rank}>${card.rank}</option>`)}
+              </select>
+            </div>
+          </div>
+          <input class="btn btn--primary" type="submit" id="submit" value="Request" />
+        </form>
+      </div>
     </div>`
   }
 
@@ -93,10 +102,14 @@ class GameView {
 
   hand_section() {
     return `
-    <div class="hand">
-      ${this.player_hand()}
-    </div>
-    `
+    <div class="panel panel--gutter">
+      <div class="panel__header">
+        <span class="panel__title">Your Hand</span>
+      </div>
+      <div class="hand">
+        ${this.player_hand()}
+      </div>
+    </div>`
   }
 
   player_hand() {
@@ -110,14 +123,18 @@ class GameView {
 
   books_section() {
     return `
-    <div class="books">
-      <div class="cards">
-        ${this.game.player.books.map(card =>
-          `<img src="./src/images/cards/2B.svg" class="playing-card" alt="${card.rank}-${card.suit}" />`
-        ).join('')}
+    <div class="panel panel--gutter">
+      <div class="panel__header">
+        <span class="panel__title">Your Books</span>
       </div>
-    </div>
-    `
+      <div class="books">
+        <div class="cards">
+          ${this.game.player.books.map(card =>
+            `<img src="./src/images/cards/2B.svg" class="playing-card" alt="${card.rank}-${card.suit}" />`
+          ).join('')}
+        </div>
+      </div>
+    </div>`
   }
 
   update_view() {
