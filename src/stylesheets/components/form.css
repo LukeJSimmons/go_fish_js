@@ -23,6 +23,10 @@
 .form-row {
   display: flex;
 
+  > * {
+    flex: 1;
+  }
+
   .form-control {
     border-radius: 0;
   }

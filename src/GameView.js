@@ -5,6 +5,14 @@ class GameView {
 
   draw(container) {
     container.innerHTML = this.game_page()
+    container.querySelector('form').addEventListener('submit', this.submitForm.bind(this))
+  }
+
+  submitForm(event) {
+    event.preventDefault()
+    const data = new FormData(document.querySelector('form'))
+    this.game.play_round(data.get('request'), data.get('target'))
+    document.querySelector('.feed__output').innerHTML = this.feed_output()
   }
 
   game_page() {
@@ -39,8 +47,32 @@ class GameView {
   feed_section() {
     return `
     <div class="feed">
-
+      <div class="feed__output">
+      </div>
+      <form class="form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="target">Target</label>
+            <select class="form-control" id="target" name="target">
+              ${this.game.bots.map(bot => ` <option value="${bot.name}">${bot.name}</option>`)}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="request">Request</label>
+            <select class="form-control" id="request" name="request">
+              ${this.game.players[0].hand.map(card => ` <option value=${card.rank}>${card.rank}</option>`)}
+            </select>
+          </div>
+        </div>
+        <input class="btn btn--primary" type="submit" id="submit" value="Request" />
+      </form>
     </div>`
+  }
+
+  feed_output() {
+    return this.game.round_results.map(result => {
+      return `<div class="feed-bubble">${result}</div>`
+    }).join('')
   }
 
   hand_section() {

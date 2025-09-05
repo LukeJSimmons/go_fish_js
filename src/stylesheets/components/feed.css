@@ -1,0 +1,10 @@
+.feed {
+  display: grid;
+  grid-template-rows: 1fr auto;
+
+  overflow: hidden;
+
+  .feed__output {
+    overflow-y: auto;
+  }
+}

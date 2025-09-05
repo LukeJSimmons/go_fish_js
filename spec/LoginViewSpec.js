@@ -1,8 +1,8 @@
 describe('LoginView', () => {
-  let view
-  let stub
-  let container
-  let result
+  let view,
+      stub,
+      container,
+      result
 
   beforeEach(() => {
     container = document.createElement('div')

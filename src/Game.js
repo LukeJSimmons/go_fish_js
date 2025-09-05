@@ -7,6 +7,7 @@ class Game {
     this._num_of_bots = Number(num_of_bots)
     this._bots = this.build_bots()
     this._deck = new Deck()
+    this._round_results = []
   }
 
   get players() {
@@ -19,6 +20,10 @@ class Game {
 
   get deck() {
     return this._deck
+  }
+
+  get round_results() {
+    return this._round_results
   }
 
   build_bots() {
@@ -35,5 +40,9 @@ class Game {
     all_players.map((player) => {
       Array.from(Array(Game.handSize)).forEach(n => player.add_card_to_hand(this.deck.draw_card()))
     })
+  }
+
+  play_round(request, target) {
+    this.round_results.push(`You asked ${target} for ${request}s`)
   }
 }

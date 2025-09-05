@@ -5,11 +5,16 @@ describe('GameView', () => {
 
   beforeEach(() => {
     container = document.createElement('div')
+    document.body.append(container)
     player = new Player('Joe')
     game = new Game([player], 1)
     view = new GameView(game)
     game.start()
     view.draw(container)
+  })
+
+  afterEach(() => {
+    container.remove()
   })
 
   it('displays bots', () => {
@@ -24,5 +29,13 @@ describe('GameView', () => {
   it('displays hand', () => {
     hand = container.querySelector('.hand')
     expect(hand.querySelectorAll('.playing-card').length).toEqual(game.players[0].hand.length)
+  })
+
+  describe('request form', () => {
+    it('plays a round on form submit', () => {
+      const form = container.querySelector('form')
+      form.querySelector('#submit').click()
+      expect(container.querySelectorAll('.feed-bubble').length).toEqual(1)
+    })
   })
 })
