@@ -15,6 +15,7 @@ class Player {
   add_cards_to_hand(cards) {
     this.hand.push(cards)
     this._hand = this.hand.flat()
+    return cards
   }
 
   remove_cards_from_hand(cards) {

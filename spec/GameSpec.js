@@ -66,5 +66,29 @@ describe('Game', () => {
         expect(game.bots[0].hand.length).toEqual(0)
       })
     })
+
+    describe('when there are no matching cards', () => {
+      beforeEach(() => {
+        hand = [new Card('A','H')]
+        player = new Human(name, hand)
+        deck = new Deck([new Card('2','H')])
+        game = new Game([player], num_of_bots, deck)
+        game.bots[0] = new Bot('Bot 1', [new Card('10','D')])
+      })
+
+      it('draws a card to player hand from the deck', () => {
+        expect(game.player.hand.length).toEqual(1)
+        expect(game.deck.cards.length).toEqual(1)
+        game.play_round(request, target)
+        expect(game.deck.cards.length).toEqual(0)
+        expect(game.player.hand.length).toEqual(2)
+      })
+
+      it('does not removes any cards from target hand', () => {
+        expect(game.bots[0].hand.length).toEqual(1)
+        game.play_round(request, target)
+        expect(game.bots[0].hand.length).toEqual(1)
+      })
+    })
   })
 })

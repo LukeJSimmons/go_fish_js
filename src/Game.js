@@ -2,11 +2,11 @@ class Game {
   static handSize = 7
   static deckSize = 52
 
-  constructor(players, num_of_bots) {
+  constructor(players, num_of_bots, deck = new Deck()) {
     this._players = players
     this._num_of_bots = Number(num_of_bots)
     this._bots = this.build_bots()
-    this._deck = new Deck()
+    this._deck = deck
     this._round_results = []
   }
 
@@ -44,7 +44,8 @@ class Game {
 
   play_round(request, target) {
     const matching_cards = this.handle_matching_cards(request, target)
-    this.round_results.unshift(new RoundResult(request, target, matching_cards))
+    const drawn_card = matching_cards.length == 0 ? this.player.add_cards_to_hand(this.deck.draw_card()) : null
+    this.round_results.push(new RoundResult(request, target, matching_cards, drawn_card))
   }
 
   handle_matching_cards(request, target) {
