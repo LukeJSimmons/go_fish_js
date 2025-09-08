@@ -58,7 +58,7 @@ class Game {
   play_round(request, target) {
     const matching_cards = this.handle_matching_cards(request, target)
     const drawn_card = matching_cards.length == 0 ? this.current_player.add_cards_to_hand(this.deck.draw_card()) : null
-    this.round_results.push(new RoundResult(request, target, matching_cards, drawn_card))
+    this.round_results.push(new RoundResult(request, target, matching_cards, drawn_card, this.current_player))
     if (drawn_card && drawn_card.rank != request) this._round++
     if (this.current_player instanceof Bot) this.play_bot_round()
   }

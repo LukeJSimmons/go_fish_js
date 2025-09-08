@@ -10,7 +10,8 @@ describe('RoundResult', () => {
     target = 'Bot 1'
     matching_cards = []
     drawn_card = null
-    result = new RoundResult(request, target, matching_cards, drawn_card)
+    current_player = new Human()
+    result = new RoundResult(request, target, matching_cards, drawn_card, current_player)
   })
 
   describe('question', () => {
@@ -20,6 +21,23 @@ describe('RoundResult', () => {
       question = result.question()
       expect(question).toContain(target)
       expect(question).toContain(request)
+    })
+
+    describe('when current_player is a bot', () => {
+      beforeEach(() => {
+        request = 'A'
+        target = 'Player'
+        matching_cards = []
+        drawn_card = null
+        current_player = new Bot('Bot 1')
+        result = new RoundResult(request, target, matching_cards, drawn_card, current_player)
+      })
+
+      it('displays message in the 2nd person', () => {
+        question = result.question()
+        expect(question).toContain(result._current_player.name)
+        expect(question).toContain('asked You')
+      })
     })
   })
 

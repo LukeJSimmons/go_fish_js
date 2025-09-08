@@ -1,13 +1,14 @@
 class RoundResult {
-  constructor(request, target, matching_cards, drawn_card) {
+  constructor(request, target, matching_cards, drawn_card, current_player) {
     this._request = request
     this._target = target
     this._matching_cards = matching_cards
     this._drawn_card = drawn_card
+    this._current_player = current_player
   }
 
   question() {
-    return `You asked ${this._target} for ${this._request}s`
+    return `${this.object()} asked ${this.subject()} for ${this._request}s`
   }
 
   response() {
@@ -18,5 +19,13 @@ class RoundResult {
   action() {
     if (this._drawn_card) return `You drew a ${this._drawn_card.rank}`
     return null
+  }
+
+  object() {
+    return this._current_player instanceof Human ? "You" : this._current_player.name
+  }
+
+  subject() {
+    return this._target.includes("Bot") ? this._target : "You"
   }
 }
