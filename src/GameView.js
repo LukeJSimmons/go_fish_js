@@ -1,9 +1,11 @@
 class GameView {
   constructor(game) {
     this.game = game
+    this.container = null
   }
 
   draw(container) {
+    this.container = container
     container.innerHTML = this.game_page()
     container.querySelector('form').addEventListener('submit', this.submitForm.bind(this))
   }
@@ -12,7 +14,8 @@ class GameView {
     event.preventDefault()
     const data = new FormData(document.querySelector('form'))
     this.game.play_round(data.get('request'), data.get('target'))
-    this.update_view()
+    debugger
+    this.draw(this.container)
   }
 
   game_page() {
@@ -57,6 +60,7 @@ class GameView {
     <div class="panel panel--highlight">
       <div class="panel__header">
         <span class="panel__title">Feed</span>
+        <span class="badge">${this.game.current_player.name}'s Turn</span>
       </div>
       <div class="feed">
         <div class="feed__output">
@@ -77,7 +81,12 @@ class GameView {
               </select>
             </div>
           </div>
-          <input class="btn btn--primary" type="submit" id="submit" value="Request" />
+          <input
+            class="btn btn--primary"
+            type="submit" id="submit"
+            value="Request"
+            ${this.game.current_player.name != this.game.player.name ? "disabled" : ""}
+          />
         </form>
       </div>
     </div>`
@@ -97,7 +106,8 @@ class GameView {
               <i class="ph ph-arrow-elbow-down-right icon"></i>
               <div class="feed-bubble feed-bubble--action">${result.action()}</div>
             </div>
-          </div>` : ``}`
+          </div>` : ``}
+      </div>`
     }).join('')
   }
 
@@ -136,11 +146,5 @@ class GameView {
         </div>
       </div>
     </div>`
-  }
-
-  update_view() {
-    document.querySelector('.feed__output').innerHTML = this.feed_output()
-    document.querySelector('.hand').innerHTML = this.player_hand()
-    document.querySelector('.players').innerHTML = this.bot_accordions()
   }
 }

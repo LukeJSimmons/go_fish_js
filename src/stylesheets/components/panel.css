@@ -8,6 +8,9 @@
   overflow: hidden;
 
   .panel__header {
+    display: flex;
+    justify-content: space-between;
+
     padding: var(--op-space-small);
     box-shadow: var(--op-border-bottom) var(--op-color-border);
   }

@@ -31,6 +31,10 @@ describe('GameView', () => {
     expect(hand.querySelectorAll('.playing-card').length).toEqual(game.player.hand.length)
   })
 
+  it('displays current_player', () => {
+    expect(container.innerHTML).toContain(`${game.current_player.name}'s Turn`)
+  })
+
   describe('request form', () => {
     describe('options', () => {
       beforeEach(() => {
@@ -44,6 +48,14 @@ describe('GameView', () => {
         const request_select = container.querySelector('#request')
         expect(request_select.innerHTML).toContain(player.hand[0].rank)
         expect(request_select.querySelectorAll('option').length).toEqual(1)
+      })
+    })
+
+    describe('submitting form', () => {
+      it('only allows submission on players turn', () => {
+        expect(container.querySelector('form').innerHTML).not.toContain('disabled')
+        container.querySelector('form').querySelector('#submit').click()
+        expect(container.querySelector('form').innerHTML).toContain('disabled')
       })
     })
 

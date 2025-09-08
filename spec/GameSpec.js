@@ -20,6 +20,14 @@ describe('Game', () => {
     expect(game.bots.every(bot => bot.hand)).toEqual(true)
   })
 
+  it('has a round', () => {
+    expect(game.round).toEqual(1)
+  })
+
+  it('has a current_player', () => {
+    expect(game.current_player).toEqual(game.player)
+  })
+
   describe('start', () => {
     it('deals out cards from the deck', () => {
       game.start()
@@ -65,13 +73,19 @@ describe('Game', () => {
         game.play_round(request, target)
         expect(game.bots[0].hand.length).toEqual(0)
       })
+
+      it ('does not increment round', () => {
+        expect(game.round).toEqual(1)
+        game.play_round(request, target)
+        expect(game.round).toEqual(1)
+      })
     })
 
     describe('when there are no matching cards', () => {
       beforeEach(() => {
         hand = [new Card('A','H')]
         player = new Human(name, hand)
-        deck = new Deck([new Card('2','H')])
+        deck = new Deck([new Card('A','D')])
         game = new Game([player], num_of_bots, deck)
         game.bots[0] = new Bot('Bot 1', [new Card('10','D')])
       })
@@ -88,6 +102,36 @@ describe('Game', () => {
         expect(game.bots[0].hand.length).toEqual(1)
         game.play_round(request, target)
         expect(game.bots[0].hand.length).toEqual(1)
+      })
+
+      describe('when drawn card is request', () => {
+        it ('does not increment round', () => {
+          expect(game.round).toEqual(1)
+          game.play_round(request, target)
+          expect(game.round).toEqual(1)
+        })
+      })
+
+      describe('when drawn card is not request', () => {
+        beforeEach(() => {
+          hand = [new Card('A','H')]
+          player = new Human(name, hand)
+          deck = new Deck([new Card('10','D')])
+          game = new Game([player], num_of_bots, deck)
+          game.bots[0] = new Bot('Bot 1', [new Card('10','D')])
+        })
+
+        it ('increments round', () => {
+          expect(game.round).toEqual(1)
+          game.play_round(request, target)
+          expect(game.round).toEqual(2)
+        })
+
+        it('changes current_player', () => {
+          expect(game.current_player).toEqual(game.player)
+          game.play_round(request, target)
+          expect(game.current_player).toEqual(game.players[0])
+        })
       })
     })
   })

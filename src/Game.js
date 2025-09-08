@@ -8,6 +8,11 @@ class Game {
     this._bots = this.build_bots()
     this._deck = deck
     this._round_results = []
+    this._round = 1
+  }
+
+  get players() {
+    return this._bots.concat(this._players)
   }
 
   get player() {
@@ -24,6 +29,14 @@ class Game {
 
   get round_results() {
     return this._round_results
+  }
+
+  get round() {
+    return this._round
+  }
+
+  get current_player() {
+    return this.players[this.round % this.players.length]
   }
 
   build_bots() {
@@ -46,6 +59,7 @@ class Game {
     const matching_cards = this.handle_matching_cards(request, target)
     const drawn_card = matching_cards.length == 0 ? this.player.add_cards_to_hand(this.deck.draw_card()) : null
     this.round_results.push(new RoundResult(request, target, matching_cards, drawn_card))
+    if (drawn_card && drawn_card.rank != request) this._round++
   }
 
   handle_matching_cards(request, target) {
