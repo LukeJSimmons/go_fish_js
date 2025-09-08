@@ -51,14 +51,6 @@ describe('GameView', () => {
       })
     })
 
-    describe('submitting form', () => {
-      it('only allows submission on players turn', () => {
-        expect(container.querySelector('form').innerHTML).not.toContain('disabled')
-        container.querySelector('form').querySelector('#submit').click()
-        expect(container.querySelector('form').innerHTML).toContain('disabled')
-      })
-    })
-
     describe('when form is submitted', () => {
       beforeEach(() => {
         player = new Human(name, [new Card('A','H')])

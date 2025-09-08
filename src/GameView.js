@@ -14,7 +14,6 @@ class GameView {
     event.preventDefault()
     const data = new FormData(document.querySelector('form'))
     this.game.play_round(data.get('request'), data.get('target'))
-    debugger
     this.draw(this.container)
   }
 
@@ -85,7 +84,6 @@ class GameView {
             class="btn btn--primary"
             type="submit" id="submit"
             value="Request"
-            ${this.game.current_player.name != this.game.player.name ? "disabled" : ""}
           />
         </form>
       </div>
@@ -103,9 +101,8 @@ class GameView {
         </div>
         ${result.action() != null ? `
           <div class="feed-bubble-row">
-              <i class="ph ph-arrow-elbow-down-right icon"></i>
-              <div class="feed-bubble feed-bubble--action">${result.action()}</div>
-            </div>
+            <i class="ph ph-arrow-elbow-down-right icon"></i>
+            <div class="feed-bubble feed-bubble--action">${result.action()}</div>
           </div>` : ``}
       </div>`
     }).join('')

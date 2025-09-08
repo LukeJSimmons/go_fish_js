@@ -57,16 +57,23 @@ class Game {
 
   play_round(request, target) {
     const matching_cards = this.handle_matching_cards(request, target)
-    const drawn_card = matching_cards.length == 0 ? this.player.add_cards_to_hand(this.deck.draw_card()) : null
+    const drawn_card = matching_cards.length == 0 ? this.current_player.add_cards_to_hand(this.deck.draw_card()) : null
     this.round_results.push(new RoundResult(request, target, matching_cards, drawn_card))
     if (drawn_card && drawn_card.rank != request) this._round++
+    if (this.current_player instanceof Bot) this.play_bot_round()
   }
 
   handle_matching_cards(request, target) {
-    const target_bot = this.bots.find(bot => bot.name == target)
-    const matching_cards = target_bot.hand.filter(card => card.rank == request)
-    this.player.add_cards_to_hand(matching_cards)
-    target_bot.remove_cards_from_hand(matching_cards)
+    const target_player = this.players.find(player => player.name == target)
+    const matching_cards = target_player.hand.filter(card => card.rank == request)
+    this.current_player.add_cards_to_hand(matching_cards)
+    target_player.remove_cards_from_hand(matching_cards)
     return matching_cards
+  }
+
+  play_bot_round() {
+    const request = this.current_player.request()
+    const target = this.player.name
+    this.play_round(request, target)
   }
 }

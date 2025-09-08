@@ -48,12 +48,6 @@ describe('Game', () => {
       game.start()
     })
 
-    it('adds result to round_results', () => {
-      expect(game.round_results.length).toEqual(0)
-      game.play_round(request, target)
-      expect(game.round_results.length).toEqual(1)
-    })
-
     describe('when there are matching cards', () => {
       beforeEach(() => {
         hand = [new Card('A','H')]
@@ -78,6 +72,12 @@ describe('Game', () => {
         expect(game.round).toEqual(1)
         game.play_round(request, target)
         expect(game.round).toEqual(1)
+      })
+
+      it('adds result to round_results', () => {
+        expect(game.round_results.length).toEqual(0)
+        game.play_round(request, target)
+        expect(game.round_results.length).toEqual(1)
       })
     })
 
@@ -116,7 +116,7 @@ describe('Game', () => {
         beforeEach(() => {
           hand = [new Card('A','H')]
           player = new Human(name, hand)
-          deck = new Deck([new Card('10','D')])
+          deck = new Deck([new Card('8','D'), new Card('5','D')])
           game = new Game([player], num_of_bots, deck)
           game.bots[0] = new Bot('Bot 1', [new Card('10','D')])
         })
@@ -124,13 +124,13 @@ describe('Game', () => {
         it ('increments round', () => {
           expect(game.round).toEqual(1)
           game.play_round(request, target)
-          expect(game.round).toEqual(2)
+          expect(game.round).toEqual(3)
         })
 
-        it('changes current_player', () => {
-          expect(game.current_player).toEqual(game.player)
+        it('plays bot round', () => {
+          expect(game.round_results.length).toEqual(0)
           game.play_round(request, target)
-          expect(game.current_player).toEqual(game.players[0])
+          expect(game.round_results.length).toEqual(2)
         })
       })
     })
