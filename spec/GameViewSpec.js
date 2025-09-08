@@ -32,6 +32,21 @@ describe('GameView', () => {
   })
 
   describe('request form', () => {
+    describe('options', () => {
+      beforeEach(() => {
+        player = new Human(name, [new Card('A','H'), new Card('A', 'D')])
+        game = new Game([player], 1)
+        view = new GameView(game)
+        view.draw(container)
+      })
+
+      it('displays request options as unique ranks in player hand', () => {
+        const request_select = container.querySelector('#request')
+        expect(request_select.innerHTML).toContain(player.hand[0].rank)
+        expect(request_select.querySelectorAll('option').length).toEqual(1)
+      })
+    })
+
     describe('when form is submitted', () => {
       beforeEach(() => {
         player = new Human(name, [new Card('A','H')])

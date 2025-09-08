@@ -73,7 +73,7 @@ class GameView {
             <div class="form-group">
               <label for="request">Request</label>
               <select class="form-control" id="request" name="request">
-                ${this.game.player.hand.map(card => ` <option value=${card.rank}>${card.rank}</option>`)}
+                ${this.game.player.unique_ranks().map(rank => ` <option value=${rank}>${rank}</option>`)}
               </select>
             </div>
           </div>
