@@ -32,6 +32,7 @@ class GameView {
     <div class="panel">
       <div class="panel__header">
         <span class="panel__title">Go Fish</span>
+        <span>${this.game.deck.cards.length}</span>
       </div>
       <div class="players">
         ${this.bot_accordions()}

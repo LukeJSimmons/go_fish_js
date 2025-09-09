@@ -14,6 +14,7 @@ class Player {
   }
 
   add_cards_to_hand(cards) {
+    if (!cards || (cards instanceof Array && !cards[0])) return
     this.hand.push(cards)
     this._hand = this.hand.flat()
     return cards

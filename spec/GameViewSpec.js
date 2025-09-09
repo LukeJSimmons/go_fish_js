@@ -71,7 +71,7 @@ describe('GameView', () => {
         player_hand = container.querySelector('.hand')
         bot_hand = container.querySelector('.cards--player')
         expect(player_hand.querySelectorAll('.playing-card').length).toEqual(2)
-        expect(bot_hand.querySelectorAll('.playing-card').length).toEqual(0)
+        expect(bot_hand.querySelectorAll('.playing-card').length).toEqual(1)
       })
 
       it('does not show the action bubble', () => {

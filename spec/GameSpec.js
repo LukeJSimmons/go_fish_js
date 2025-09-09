@@ -65,7 +65,7 @@ describe('Game', () => {
       it('removes matching card from target hand', () => {
         expect(game.bots[0].hand.length).toEqual(1)
         game.play_round(request, target)
-        expect(game.bots[0].hand.length).toEqual(0)
+        expect(game.bots[0].hand.length).toEqual(1)
       })
 
       it ('does not increment round', () => {
@@ -149,13 +149,45 @@ describe('Game', () => {
       it('removes book from hand', () => {
         expect(game.player.hand.length).toEqual(3)
         game.play_round(request, target)
-        expect(game.player.hand.length).toEqual(0)
+        expect(game.player.hand.length).toEqual(1)
       })
 
       it('adds book to books', () => {
         expect(game.player.books.length).toEqual(0)
         game.play_round(request, target)
         expect(game.player.books.length).toEqual(1)
+      })
+    })
+
+    describe('when your hand is empty', () => {
+      beforeEach(() => {
+        hand = [new Card('A','H'), new Card('A','S'), new Card('A','C')]
+        player = new Human(name, hand)
+        deck = new Deck([new Card('8','H'), new Card('A','D')])
+        game = new Game([player], num_of_bots, deck)
+        game.bots[0] = new Bot('Bot 1', [new Card('10','D')])
+      })
+
+      it('draws a card', () => {
+        expect(game.player.hand.length).toEqual(3)
+        game.play_round(request, target)
+        expect(game.player.hand.length).toEqual(1)
+      })
+    })
+
+    describe('when the deck is empty', () => {
+      beforeEach(() => {
+        hand = [new Card('A','H')]
+        player = new Human(name, hand)
+        deck = new Deck([])
+        game = new Game([player], num_of_bots, deck)
+        game.bots[0] = new Bot('Bot 1', [new Card('10','D')])
+      })
+
+      it('does not draw a card', () => {
+        expect(game.player.hand.length).toEqual(1)
+        game.play_round(request, target)
+        expect(game.player.hand.length).toEqual(1)
       })
     })
   })

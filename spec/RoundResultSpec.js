@@ -2,7 +2,7 @@ describe('RoundResult', () => {
   let request,
       target,
       matching_cards,
-      drawn_card,
+      fished_card,
       scored_books,
       result
 
@@ -10,10 +10,10 @@ describe('RoundResult', () => {
     request = 'A'
     target = 'Bot 1'
     matching_cards = []
-    drawn_card = null
+    fished_card = null
     scored_books = []
     current_player = new Human()
-    result = new RoundResult(request, target, matching_cards, drawn_card, current_player, scored_books)
+    result = new RoundResult(request, target, matching_cards, fished_card, current_player, scored_books)
   })
 
   describe('question', () => {
@@ -30,9 +30,9 @@ describe('RoundResult', () => {
         request = 'A'
         target = 'Player'
         matching_cards = []
-        drawn_card = null
+        fished_card = null
         current_player = new Bot('Bot 1')
-        result = new RoundResult(request, target, matching_cards, drawn_card, current_player)
+        result = new RoundResult(request, target, matching_cards, fished_card, current_player)
       })
 
       it('displays message in the 2nd person', () => {
@@ -49,7 +49,7 @@ describe('RoundResult', () => {
     describe('when there are matching cards', () => {
       beforeEach(() => {
         matching_cards = [new Card('A','H')]
-        result = new RoundResult(request, target, matching_cards, drawn_card)
+        result = new RoundResult(request, target, matching_cards, fished_card)
       })
 
       it('returns string with request, target, amount taken', () => {
@@ -76,7 +76,7 @@ describe('RoundResult', () => {
     describe('when there are matching cards', () => {
       beforeEach(() => {
         matching_cards = [new Card('A','H')]
-        result = new RoundResult(request, target, matching_cards, drawn_card)
+        result = new RoundResult(request, target, matching_cards, fished_card)
       })
 
       it('returns null', () => {
@@ -87,13 +87,13 @@ describe('RoundResult', () => {
 
     describe('when there are no matching cards', () => {
       beforeEach(() => {
-        drawn_card = new Card('A','H')
-        result = new RoundResult(request, target, matching_cards, drawn_card)
+        fished_card = new Card('A','H')
+        result = new RoundResult(request, target, matching_cards, fished_card)
       })
 
       it('returns a string with drawn card', () => {
         action = result.action()
-        expect(action).toContain(drawn_card.rank)
+        expect(action).toContain(fished_card.rank)
       })
     })
   })
@@ -111,7 +111,7 @@ describe('RoundResult', () => {
     describe('when there is a scored books', () => {
       beforeEach(() => {
         scored_books = [[new Card('A','H'), new Card('A','D'), new Card('A','S'), new Card('A','C')]]
-        result = new RoundResult(request, target, matching_cards, drawn_card, current_player, scored_books)
+        result = new RoundResult(request, target, matching_cards, fished_card, current_player, scored_books)
       })
 
       it('returns scored book message', () => {

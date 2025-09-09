@@ -57,10 +57,11 @@ class Game {
 
   play_round(request, target) {
     const matching_cards = this.handle_matching_cards(request, target)
-    const drawn_card = matching_cards.length == 0 ? this.current_player.add_cards_to_hand(this.deck.draw_card()) : null
+    const fished_card = matching_cards.length == 0 ? this.current_player.add_cards_to_hand(this.deck.draw_card()) : null
     const scored_books = this.current_player.score_books_if_possible()
-    this.round_results.unshift(new RoundResult(request, target, matching_cards, drawn_card, this.current_player, scored_books))
-    if (drawn_card && drawn_card.rank != request) this._round++
+    const drawn_cards = this.draw_cards_if_necessary()
+    this.round_results.unshift(new RoundResult(request, target, matching_cards, fished_card, this.current_player, scored_books))
+    if (fished_card && fished_card.rank != request) this._round++
     if (this.current_player instanceof Bot) this.play_bot_round()
   }
 
@@ -70,6 +71,14 @@ class Game {
     this.current_player.add_cards_to_hand(matching_cards)
     target_player.remove_cards_from_hand(matching_cards)
     return matching_cards
+  }
+
+  draw_cards_if_necessary() {
+    const drawn_cards = this.players.map(player => {
+      if (player.hand.length == 0) return player.add_cards_to_hand(this.deck.draw_card())
+      }
+    )
+    return drawn_cards
   }
 
   play_bot_round() {
