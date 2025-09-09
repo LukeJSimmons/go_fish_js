@@ -77,6 +77,28 @@ describe('GameView', () => {
       it('does not show the action bubble', () => {
         expect(container.querySelectorAll('.feed-bubble--action').length).toEqual(0)
       })
+
+      describe('when a book is scored', () => {
+        beforeEach(() => {
+          player = new Human(name, [new Card('A','H'), new Card('A','S'), new Card('A','C')])
+          game = new Game([player], 1)
+          game.bots[0] = new Bot('Bot 1', [new Card('A','D')])
+          view = new GameView(game)
+          view.draw(container)
+          const form = container.querySelector('form')
+          form.querySelector('#submit').click()
+        })
+
+        it('displays scored book', () => {
+          expect(container.querySelectorAll('.feed-bubble--book').length).toEqual(1)
+        })
+
+        it('adds scored book to books section', () => {
+          const books_section = container.querySelector('.books')
+          expect(books_section.querySelectorAll('.playing-card').length).toEqual(1)
+          expect(books_section.querySelector('.playing-card').alt).toContain('A')
+        })
+      })
     })
   })
 })

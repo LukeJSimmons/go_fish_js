@@ -3,6 +3,7 @@ describe('RoundResult', () => {
       target,
       matching_cards,
       drawn_card,
+      scored_books,
       result
 
   beforeEach(() => {
@@ -10,8 +11,9 @@ describe('RoundResult', () => {
     target = 'Bot 1'
     matching_cards = []
     drawn_card = null
+    scored_books = []
     current_player = new Human()
-    result = new RoundResult(request, target, matching_cards, drawn_card, current_player)
+    result = new RoundResult(request, target, matching_cards, drawn_card, current_player, scored_books)
   })
 
   describe('question', () => {
@@ -92,6 +94,29 @@ describe('RoundResult', () => {
       it('returns a string with drawn card', () => {
         action = result.action()
         expect(action).toContain(drawn_card.rank)
+      })
+    })
+  })
+
+  describe('books', () => {
+    let books
+
+    describe('when there are no scored books', () => {
+      it('returns null', () => {
+        books = result.books()
+        expect(books).toEqual(null)
+      })
+    })
+
+    describe('when there is a scored books', () => {
+      beforeEach(() => {
+        scored_books = [[new Card('A','H'), new Card('A','D'), new Card('A','S'), new Card('A','C')]]
+        result = new RoundResult(request, target, matching_cards, drawn_card, current_player, scored_books)
+      })
+
+      it('returns scored book message', () => {
+        books = result.books()
+        expect(books).toContain(scored_books[0][0].rank)
       })
     })
   })

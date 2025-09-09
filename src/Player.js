@@ -1,7 +1,8 @@
 class Player {
-  constructor(name, hand=[]) {
+  constructor(name, hand=[], books=[]) {
     this._name = name
     this._hand = hand
+    this._books = books
   }
 
   get name() {
@@ -24,5 +25,18 @@ class Player {
 
   unique_ranks() {
     return [...new Set(this.hand.map(card => card.rank))]
+  }
+
+  score_books_if_possible() {
+    const scored_books = []
+    Card.ranks.forEach(rank => {
+      const rank_group = this.hand.filter(card => card.rank == rank)
+      if (rank_group.length == 4) {
+        scored_books.push(rank_group)
+        this._books.push(rank_group)
+        this.remove_cards_from_hand(rank_group)
+      }
+    })
+    return scored_books
   }
 }

@@ -134,5 +134,29 @@ describe('Game', () => {
         })
       })
     })
+
+    describe('when a book is scored', () => {
+      beforeEach(() => {
+        request = 'A'
+        target = 'Bot 1'
+        game.start()
+        hand = [new Card('A','H'), new Card('A','S'), new Card('A','C')]
+        player = new Human(name, hand)
+        game = new Game([player], num_of_bots)
+        game.bots[0] = new Bot('Bot 1', [new Card('A','D')])
+      })
+
+      it('removes book from hand', () => {
+        expect(game.player.hand.length).toEqual(3)
+        game.play_round(request, target)
+        expect(game.player.hand.length).toEqual(0)
+      })
+
+      it('adds book to books', () => {
+        expect(game.player.books.length).toEqual(0)
+        game.play_round(request, target)
+        expect(game.player.books.length).toEqual(1)
+      })
+    })
   })
 })

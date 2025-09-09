@@ -1,5 +1,5 @@
 .game-page {
-  --gf-sidebar-width: calc(75 * var(--op-size-unit));
+  --gf-sidebar-width: calc(90 * var(--op-size-unit));
   --gf-footer-height: calc(60 * var(--op-size-unit));
 
   display: grid;

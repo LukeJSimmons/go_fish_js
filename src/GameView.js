@@ -104,6 +104,11 @@ class GameView {
             <i class="ph ph-arrow-elbow-down-right icon"></i>
             <div class="feed-bubble feed-bubble--action">${result.action()}</div>
           </div>` : ``}
+        ${result.books() != null ? `
+          <div class="feed-bubble-row">
+            <i class="ph ph-arrow-elbow-down-right icon"></i>
+            <div class="feed-bubble feed-bubble--book">${result.books()}</div>
+          </div>` : ``}
       </div>`
     }).join('')
   }
@@ -137,8 +142,12 @@ class GameView {
       </div>
       <div class="books">
         <div class="cards">
-          ${this.game.player.books.map(card =>
-            `<img src="./src/images/cards/2B.svg" class="playing-card" alt="${card.rank}-${card.suit}" />`
+          ${this.game.player.books.map(book =>
+            `<img
+              src="./src/images/cards/${book[0].rank}${book[0].suit}.svg"
+              class="playing-card"
+              alt="${book[0].rank}-${book[0].suit}"
+            />`
           ).join('')}
         </div>
       </div>

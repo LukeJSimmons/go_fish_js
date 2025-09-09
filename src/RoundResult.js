@@ -1,10 +1,11 @@
 class RoundResult {
-  constructor(request, target, matching_cards, drawn_card, current_player) {
+  constructor(request, target, matching_cards, drawn_card, current_player, scored_books) {
     this._request = request
     this._target = target
     this._matching_cards = matching_cards
     this._drawn_card = drawn_card
     this._current_player = current_player
+    this._scored_books = scored_books
   }
 
   question() {
@@ -18,6 +19,11 @@ class RoundResult {
 
   action() {
     if (this._drawn_card) return `You drew a ${this._drawn_card.rank}`
+    return null
+  }
+
+  books() {
+    if (this._scored_books.length > 0) return `${this.object()} scored a book of ${this._scored_books[0][0].rank}`
     return null
   }
 
