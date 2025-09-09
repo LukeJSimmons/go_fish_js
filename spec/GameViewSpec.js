@@ -99,6 +99,22 @@ describe('GameView', () => {
           expect(books_section.querySelector('.playing-card').alt).toContain('A')
         })
       })
+
+      describe('when game is over', () => {
+        beforeEach(() => {
+          player = new Human(name, [new Card('A','H'), new Card('A','S'), new Card('A','C')])
+          game = new Game([player], 1, new Deck([]))
+          game.bots[0] = new Bot('Bot 1', [new Card('A','D')])
+          view = new GameView(game)
+          view.draw(container)
+          const form = container.querySelector('form')
+          form.querySelector('#submit').click()
+        })
+
+        it('displays win screen', () => {
+          expect(container.querySelector('.winner')).toContain(player.name)
+        })
+      })
     })
   })
 })

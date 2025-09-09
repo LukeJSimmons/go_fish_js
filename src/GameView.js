@@ -14,6 +14,7 @@ class GameView {
     event.preventDefault()
     const data = new FormData(document.querySelector('form'))
     this.game.play_round(data.get('request'), data.get('target'))
+    if (this.game.winner()) debugger
     this.draw(this.container)
   }
 

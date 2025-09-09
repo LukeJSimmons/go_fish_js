@@ -1,5 +1,5 @@
 class Card {
-  static ranks = ['A','K','Q','J','10','9','8','7','6','5','4','3','2']
+  static ranks = ['2','3','4','5','6','7','8','9','10','J','Q','K','A']
   static suits = ['H','D','S','C']
 
   constructor(rank, suit) {
@@ -13,5 +13,9 @@ class Card {
 
   get suit() {
     return this._suit
+  }
+
+  get value() {
+    return Card.ranks.indexOf(this.rank)
   }
 }

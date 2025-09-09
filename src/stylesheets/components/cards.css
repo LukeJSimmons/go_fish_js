@@ -3,6 +3,8 @@
 
   display: flex;
 
+  overflow-x: auto;
+
   padding: var(--op-space-medium);
 
   * {

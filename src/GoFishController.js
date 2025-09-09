@@ -9,10 +9,10 @@ class GoFishController {
   }
 
   startGame(name, num_of_bots) {
-    const player = new Human(name)
-    const game = new Game([player], num_of_bots)
-    const view = new GameView(game)
-    game.start()
+    this.player = new Human(name)
+    this.game = new Game([this.player], num_of_bots)
+    const view = new GameView(this.game)
+    this.game.start()
     view.draw(this.container())
   }
 }
